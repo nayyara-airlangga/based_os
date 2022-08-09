@@ -1,6 +1,9 @@
 #![no_std]
 #![no_main]
 
+mod vga_buffer;
+mod volatile;
+
 use core::panic::PanicInfo;
 
 static HELLO: &[u8] = b"Welcome to BasedOS v0.1.0";

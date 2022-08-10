@@ -8,7 +8,8 @@ use core::panic::PanicInfo;
 
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
-    println!("Welcome to BasedOS v0.1.0");
+    println!("Welcome to BasedOS");
+    println!("v0.1.0");
 
     loop {}
 }

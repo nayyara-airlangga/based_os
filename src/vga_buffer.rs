@@ -167,3 +167,32 @@ macro_rules! println {
     () => ($crate::print!("\n"));
     ($($arg:tt)*) => ($crate::print!("{}\n", format_args!($($arg)*)));
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{BUFFER_HEIGHT, WRITER};
+
+    #[test_case]
+    fn println_should_not_panic() {
+        println!("println works!");
+    }
+
+    #[test_case]
+    fn many_println_should_not_panic() {
+        for _ in 0..200 {
+            println!("Many println works too!");
+        }
+    }
+
+    #[test_case]
+    fn printed_chars_should_appear_on_screen() {
+        let msg = "Some test string that fits on a single line";
+        println!("{}", msg);
+
+        for (i, c) in msg.chars().enumerate() {
+            let screen_char = WRITER.lock().buffer.chars[BUFFER_HEIGHT - 2][i].read();
+
+            assert_eq!(char::from(screen_char.character), c);
+        }
+    }
+}

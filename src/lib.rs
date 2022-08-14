@@ -15,10 +15,17 @@ pub mod volatile;
 pub use qemu::*;
 pub use test::*;
 
-// Test entrypoint
+/// Handles the initialization process.
+pub fn init() {
+    interrupts::init_idt();
+}
+
+/// Test entrypoint
 #[cfg(test)]
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
+    init();
     test_main();
+
     loop {}
 }

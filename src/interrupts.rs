@@ -19,3 +19,11 @@ pub fn init_idt() {
 extern "x86-interrupt" fn handle_breakpoint(stack_frame: InterruptStackFrame) {
     println!("Exception: Breakpoint\n{:#?}", stack_frame);
 }
+
+#[cfg(test)]
+mod tests {
+    #[test_case]
+    fn handle_breakpoint() {
+        x86_64::instructions::interrupts::int3();
+    }
+}

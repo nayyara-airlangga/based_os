@@ -13,6 +13,11 @@ pub extern "C" fn _start() -> ! {
     println!("Welcome to BasedOS");
     println!("v0.1.0");
 
+    // Run initializers
+    based_os::init();
+
+    x86_64::instructions::interrupts::int3();
+
     #[cfg(test)]
     test_main();
 
